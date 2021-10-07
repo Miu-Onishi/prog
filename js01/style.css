@@ -1,0 +1,52 @@
+body{
+    background-image :url(back.jpg);
+    background-repeat: repeat;
+    font-family:sans-serif;
+    background-size:cover;
+}
+main{
+    margin:30px;
+}
+#a1{
+    color:rgb(15, 92, 235);
+    font-size:40px;
+    background-color:#84a57996;
+    padding: 20px;
+    margin: 30px;
+    border-style:dashed;
+}
+.flex img{
+    width:270px;
+    height:290px;
+}
+
+#a2{
+    font-size: 40px;
+    padding: 10px;
+    padding-top: 30px;
+    color:rgb(19, 6, 31);
+    border:2px solid #46963c;
+    text-shadow:3px 3px 2px rgb(137, 160, 235);
+    letter-spacing:8px;
+    border-radius: 20px;
+}
+.flex{
+    display: flex;
+}
+p{
+    font-size: 30px;
+}
+em{
+    font-size: 38px;
+}
+#sub{
+    margin:30px;
+    display: flex;
+}
+#sub img{
+    width: 300px;
+    height: 300px;
+}
+#sub p{
+    margin-left: 20px;
+}
