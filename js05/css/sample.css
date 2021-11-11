@@ -1,0 +1,45 @@
+/* body{
+    background-size: 100%;
+    margin:0;
+    padding:0;
+    text-align:left;
+    font-size: 32px;
+} */
+
+header{
+    border-bottom: 1px solid rgb(95, 91, 91);
+    text-align: center;
+}
+
+#select{
+    text-align: center;
+}
+
+
+#hour,#minute{
+    background: #39b8b8;
+    padding: 10px;
+    font-size: 25px;
+}
+
+#hour:hover,#minute:hover {background-color:#a04cc2;}
+
+option{
+    background: #a04cc2;
+}
+
+p{
+    text-align: center;
+}
+
+#button{
+    margin-top: 50px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+body{
+    background-size: 100%;
+}
+p{
+    font-size: 20px;
+}

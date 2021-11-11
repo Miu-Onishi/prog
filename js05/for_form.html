@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>繰り返し処理：for</title>
+<script src="js/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" href="css/sample.css">
+<title>年齢確認</title>
+
+</head>
+<body>
+<body background="haikei.png"></body>
+<header>
+    <h1>あと何分で授業終わる？</h1>
+</header>
+<main>
+    <p>この授業の終了時間を入力してね</ｐ>
+    <div id="select">
+        <!-- セレクトボックス作成[START] -->
+        <select id="hour"></select>
+        <select id="minute"></select>
+        <!-- セレクトボックス作成[END] -->
+    </div>
+    <div id = "button">
+        <input type="button"value="計算する" onclick="getValue('select');">
+    </div>
+    <p id="nenrei"></p>
+    <p id="hitokoto"></p>
+
+</main>
+
+
+
+<script>
+//時
+let h = ""; //例) y += '<option value="'+i+'">'+i+'</option>';
+for(let i=0; i<24; i++){
+    h += '<option value="'+i+'">'+i+'</option>';   
+}
+$("#hour").html(h);
+
+
+
+//分
+let m = "";
+for(let i=0; i<60; i++){
+    m += '<option value="'+i+'">'+i+'</option>';
+}
+$("#minute").html(m);
+
+
+var now = new Date();
+var Hour = now.getHours()*60;
+var Minutes = now.getMinutes();
+var genzai = Hour + Minutes;
+
+function getValue(idname){
+    hour2 = parseInt(hour.value*60);
+    minute2 = parseInt(minute.value);
+    var keisan = hour2 + minute2 - genzai;
+    var obj = document.getElementById(idname);
+    if(keisan <= 0){
+        var result = "残り0分です";
+        $("#hitokoto").html("お疲れ様！");
+    }else if(keisan <= 30){
+        var result = "残り" + keisan + "分です";
+        $("#hitokoto").html("あともう少し頑張って！");
+    }else if(keisan < 60){
+        var result = "残り" + keisan + "分です";
+        $("#hitokoto").html("1時間切ったよ！");
+    }else{
+        var result = "残り" + Math.floor(keisan/60) + "時間" + keisan % 60 + "分です";
+        $("#hitokoto").html("道のりは長いね");
+    }
+
+    $("#nenrei").html(result);
+    
+}
+
+
+
+
+</script>
+</body>
+</html>
