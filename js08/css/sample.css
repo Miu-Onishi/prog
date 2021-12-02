@@ -1,0 +1,71 @@
+#output{
+    width: 90%;
+    background: rgb(247, 243, 220);;
+    border: solid;
+    border-color: rgb(41, 51, 51);
+    overflow-y: scroll;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+body {
+    background: rgb(233, 185, 195);
+}
+
+h1 {
+    text-align: center;
+    background: cornsilk;
+    width: 450px;
+    border-radius: 20px;
+    margin: 30px auto;
+    padding: 10px;
+
+}
+
+#namae {
+    font-size: 13px;
+}
+
+#aikon {
+    display: inline-block;
+    background: (227, 24rgb5, 209);
+    border: 1px solid;
+    padding: 2px;
+    padding-right: 4px;
+    padding-left: 4px;
+    border-radius: 10px;
+    
+}
+
+#kaiwa {
+    margin-left: 20px;
+}
+
+
+
+button {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    background: cornsilk;
+    border-radius: 5px; 
+    cursor:pointer;
+  }
+
+#text {
+    display: block;
+    margin-top: 10px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+input {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+p {
+    text-align: center;
+}
