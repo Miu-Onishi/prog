@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="css/sample.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rampart+One&display=swap" rel="stylesheet">
+<title>クイズ練習（複数）</title>
+</head>
+<body>
+
+
+<header>
+<!-- タイトル画面 -->
+<div id="titledis1">
+  <h1>なぞなぞクイズ</h1>
+</div>
+
+<!-- ゲームプレイ画面 -->
+<div id="playdis1">
+    <h1 id="playh1"></h1>
+    <h2 id="playh2"></h2>
+</div>
+
+<!-- ゲーム終了画面 -->
+
+
+</header>
+
+<main>
+<!-- タイトル画面 -->
+<div id="titledis2">
+    <div id="btn">スタート</div>
+</div>
+
+<!-- ゲームプレイ画面 -->
+<div id="playdis2">
+    <p id="quest">ここに問題が出題されます</p>
+    <p>
+      <input type="radio" name="toi" value="1"><span id="toi1">選択肢１</span>
+      <input type="radio" name="toi" value="2"><span id="toi2">選択肢２</span>
+      <input type="radio" name="toi" value="3"><span id="toi3">選択肢３</span>
+    </p>
+</div>
+
+
+<!-- ゲーム終了画面 -->
+<div id="stopdis1">
+  <h1>あなたの得点は...</h1>
+  <p id="tokuten"></p>
+</div>
+
+
+</main>
+
+<footer>
+<!-- ゲームプレイ画面 -->
+<div id=kekka>
+  <p></p>
+</div>
+
+<!-- ゲーム終了画面 -->
+<div id="stopdis2">
+  <button type="button">もう一度遊ぶ</button> 
+</div>
+
+</footer>
+
+
+
+<script>
+
+//スタートページ
+  quizTitle();
+
+//問題文[配列]
+//クイズ開始
+let kazu = 0;
+$("#btn").on("click",function(){
+quizPlay();
+$("#titledis1").hide();
+$("#titledis2").hide();
+kazu = 1;
+$("#playh1").text(kazu + "問目");
+
+})
+
+const qs = [
+  "通るときには閉まって、通らないときには開いているものは何？",
+  "話すことがとても好きな道具は何？",
+  "世界の真ん中にいる虫は何？",
+  "赤ちゃんでもないのに、おんぶされるのが大好きなものなあに？",
+  "増えることはあっても、減ることはないものはなあに？",
+  "目を開けると見えないのに、目を閉じると見えるものは？",
+];
+
+  
+//回答選択肢[多重配列]
+const toi = [
+["踏み切り","洗濯機","冷蔵庫"],
+["スプーン","シャベル","しゃもじ"],
+["てんとう虫","カマキリ","蚊"],
+["ランドセル","トートバッグ","リュック"],
+["体重","身長","年齢"],
+["夢","雲","虹"],
+];
+
+  
+//答え[配列]
+const ans = [1,2,3,1,3,1];
+
+
+//1.最初の問題文＆回答選択肢＆回答値を設定
+let i = 0; //constは上書きができないのでletを使う
+let seikai = 0;
+$("#quest").text( qs[i] );
+$("#toi1").text(toi[i][0]);
+$("#toi2").text(toi[i][1]);
+$("#toi3").text(toi[i][2]);
+
+
+  
+
+//2.ラジオボタンをクリックしたらイベント発生！(クリックイベント)
+$("[name=toi]").on("click",function(){
+  const v = $(this).val();
+  if(i < 6){
+    if(ans[i] == v){
+      $("#kekka").text("正解！");
+      seikai++;
+    }else{
+      $("#kekka").text("不正解");
+    }
+    i++;
+    kazu++;
+  }
+  //最後のページを表示状態に
+  if( i == 6 && $("[name=toi]").on("click")){
+    stop();
+    $("#tokuten").text(seikai + "点");
+    i=0;
+  }
+
+  $("#toi1").text(toi[i][0]);
+  $("#toi2").text(toi[i][1]);
+  $("#toi3").text(toi[i][2]);
+  $("#quest").text( qs[i] );
+  $("#playh1").text(kazu + "問目");
+  
+})
+
+//もう一度遊ぶボタンを押してタイトルに戻る
+$("#stopdis2").on("click",function(){
+  i=0;
+  seikai=0;
+  kazu = 1;
+  quizTitle();
+})
+
+function quizTitle(){
+  $("#titledis1").show();
+  $("#titledis2").show();
+  $("#playdis1").hide();
+  $("#playdis2").hide();
+  $("#kekka").hide();
+  $("#stopdis1").hide();
+  $("#stopdis2").hide();
+
+}  
+function quizPlay(){
+  $("#playdis1").show();
+  $("#playdis2").show();
+  $("#kekka").show();
+}
+function stop(){
+  $("#playdis1").hide();
+  $("#playdis2").hide();
+  $("#kekka").hide();
+  $("#stopdis1").show();
+  $("#stopdis2").show();
+
+}
+
+
+//ここまでが記述領域［END］
+</script>
+</body>
+</html>
