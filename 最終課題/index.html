@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <link rel="stylesheet" href="css/sample.css">   
+    <title>じゃんけんゲーム</title>
+</head>
+<body>
+    <div id="back">
+        <body background="background.jpg"></body>
+    </div>
+    <header>
+        <a href="index.html"></a>
+        <nav class="nav">
+            <ul class="menu-group">
+              <li class="menu-item"><a href="index.html">ホーム</a></li>
+            </ul>
+          </nav>
+    </header>
+    <main>
+        <section class="main_visual">
+            <div id="titledis1">
+                <h1>じゃんけんゲーム</h1>
+            </div>
+        </section>
+
+
+        <section class="main_content">
+            <div class="main_content2">
+                <!-- ゲームタイトル画面 -->
+                <div id="playdis1">
+                    <h1>負けたらおしまい!</h1>
+                    <p>連続してじゃんけんに勝とう</p>
+                    <div id="gazou">
+                        <img src="gu.png" alt="グー">
+                        <img src="cyoki.png" alt="チョキ">
+                        <img src="pa.png" alt="パー">
+                    </div>
+                    <div id="start_btn">スタート</div>
+                </div>
+                
+                <!-- ゲームプレイ画面 -->
+                <div id="playdis2">
+                    <h1 id="No"></h1>
+                    <div id="pc_hands">コンピュータ</div>
+                    <h3 id="action">＼じゃんけん／</h3>
+                    <h3 id="make"> あなたの負け! </h3>
+                    <h3 id="kati"> あなたの勝ち! </h3>
+                    <div id="player_hands">プレイヤー</div>
+                    <ul id="sentaku">
+                        <li id="gu_btn">グー</li>
+                        <li id="cho_btn">チョキ</li>
+                        <li id="par_btn">パー</li>
+                    </ul>
+                    <div id="aiko_btn">あいこ</div>
+                    <div id="next_btn"></div>
+                    <div id="make_btn"></div>
+                    <div id=syori>
+                    <p>現在勝利数:</p><div id="win"></div>
+                    </div>
+                </div>
+                
+                <!-- ゲーム終了画面 -->
+                <div id="playdis3">
+                    <h1>連続勝利数</h1>
+                    <div id="win2"></div>
+                    <p>回</p>
+                    <label for="na">ニックネーム</label>
+                    <input type="text" id="name">
+                    <div id = "entry_btn">登録</div>
+                    <!-- <div id = "emptyy_btn">削除</div> -->
+                    <table id="list"></table>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+<script>
+
+    //タイトル画面
+    gameTitle();
+    //ゲームプレイ画面
+    $("#start_btn").on("click",function(){
+        gamePlay();   
+        $("#playdis1").hide(); 
+    })
+    //ゲーム終了画面
+    $("#make_btn").on("click",function(){
+        $("#playdis2").hide(); 
+        gameOver(); 
+    })
+
+    function gameTitle(){
+        $("#playdis1").show();
+        $("#playdis2").hide();
+        $("#playdis3").hide();
+        $("#aiko_btn").hide();
+    }  
+    function gamePlay(){
+        $("#playdis2").show();
+        $("#playdis3").hide();
+        $("#aiko_btn").hide();
+        $("#next_btn").hide();
+        $('#pc_hands').html('<img src="gu.png" alt="グー">');
+        $('#player_hands').html('<img src="gu.png" alt="グー">');
+        $("#make").hide();
+        $("#kati").hide();
+        $("#make_btn").hide();
+    }
+    function gameOver(){
+        $("#playdis3").show();
+        $("#playdis3").hide().fadeIn('slow');  
+        // $("#make").hide();
+    }
+    
+
+
+    //じゃんけん用
+let win = 0;
+let No =1;
+$("#win").text(win+ "回");
+$("#No").text(No+ "回戦");
+
+$("#gu_btn, #cho_btn, #par_btn" ).on("click", function(){
+    $("#action").html("ポン!");
+    $("#make").hide();
+});
+$("#gu_btn").on("click", function(){
+    $('#player_hands').html('<img src="gu.png" alt="グー">');
+    const num = Math.ceil(Math.random() * 3);
+    if(num == 1){  
+      $('#pc_hands').html('<img src="gu.png" alt="グー">');
+      $("#sentaku").hide();
+      $("#aiko_btn").show();
+    }
+    if(num == 2){  
+      win += 1;
+      $("#pc_hands").html("チョキ");
+      $('#pc_hands').html('<img src="cyoki.png" alt="チョキ">');
+      $("#win").text(win+ "回");
+      $("#No").text(No+ "回戦");
+      $("#sentaku").hide();
+      $("#next_btn").text(win+1 + "回戦へ");
+      $("#next_btn").show();
+      $("#kati").hide().fadeIn('slow');
+    }
+    if(num == 3){  
+      $("#pc_hands").html("パー");
+      $('#pc_hands').html('<img src="pa.png" alt="パー">');
+      $("#make").hide().fadeIn('slow');  
+      $("#sentaku").hide();
+      $("#make_btn").text("結果へ");
+      $("#make_btn").show();
+      $("#win2").text(win);
+    }
+});
+$("#cho_btn").on("click", function(){
+    $('#player_hands').html('<img src="cyoki.png" alt="チョキ">');
+    const num = Math.ceil(Math.random() * 3);
+    if(num == 1){  
+      $("#pc_hands").html("グー");
+      $('#pc_hands').html('<img src="gu.png" alt="グー">');
+      $("#make").hide().fadeIn('slow');  
+      $("#sentaku").hide();
+      $("#make_btn").text("結果へ");
+      $("#make_btn").show();
+      $("#win2").text(win);
+  
+    }
+    if(num == 2){  
+      $("#pc_hands").html("チョキ");
+      $('#pc_hands').html('<img src="cyoki.png" alt="チョキ">');
+      $("#sentaku").hide();
+      $("#aiko_btn").show();
+    }
+    if(num == 3){  
+      win += 1;
+      $("#pc_hands").html("パー");
+      $('#pc_hands').html('<img src="pa.png" alt="パー">');
+      $("#win").text(win+ "回");
+      $("#No").text(No+ "回戦");
+      $("#sentaku").hide();
+      $("#next_btn").text(win+1 + "回戦へ");
+      $("#next_btn").show();
+      $("#kati").hide().fadeIn('slow');
+    }
+});
+$("#par_btn").on("click", function(){
+    $('#player_hands').html('<img src="pa.png" alt="パー">');
+    const num = Math.ceil(Math.random() * 3);
+    if(num == 1){ 
+      win += 1; 
+      $("#pc_hands").html("グー");
+      $('#pc_hands').html('<img src="gu.png" alt="グー">');
+      $("#win").text(win+ "回");
+      $("#No").text(No+ "回戦");
+      $("#sentaku").hide();
+      $("#next_btn").text(win+1 + "回戦へ");
+      $("#next_btn").show();
+      $("#kati").hide().fadeIn('slow');
+    }
+    if(num == 2){  
+      $("#pc_hands").html("チョキ");
+      $('#pc_hands').html('<img src="cyoki.png" alt="チョキ">');
+      $("#make").hide().fadeIn('slow');  
+      $("#sentaku").hide();
+      $("#make_btn").text("結果へ");
+      $("#make_btn").show();
+      $("#win2").text(win);
+
+    }
+    if(num == 3){  
+      $("#pc_hands").html("パー");
+      $('#pc_hands').html('<img src="pa.png" alt="パー">');
+      $("#sentaku").hide();
+      $("#aiko_btn").show();
+    }
+});
+//あいこだったとき
+$("#aiko_btn").on("click",function(){
+    $("#sentaku").show();
+    $("#aiko_btn").hide();
+})
+//かったとき
+$("#next_btn").on("click",function(){
+    No += 1;
+    $("#No").text(No+ "回戦");
+    $('#pc_hands').html('<img src="gu.png" alt="グー">');
+    $('#player_hands').html('<img src="gu.png" alt="グー">');
+    $("#next_btn").hide();
+    $("#sentaku").show();
+    $("#action").html("じゃんけん");
+})
+//負けたとき
+// $("#entry_btn").on("click",function(){
+//    const name = $("#name").val();
+//    localStorage.setItem("ネーム",name);//保存
+//    const name1 = localStorage.getItem("ネーム");
+//    $("#list").html("ネーム");
+    //   const html = '<tr><th>'+nick+'</th><td>'+'</td></tr>';
+//    $("#list").append(html);
+// })
+// for(let i=0; i<localStorage.length; i++){
+//     const name3 = localStorage.name2(i);
+//     const value = localStorage.getItem(name,);
+//     // const html = '<tr><th>'+name+'</th><td>'+value+'</td></tr>';
+//     $("#list").append(name3);
+// }
+
+$("#entry_btn").on("click",function(){
+    const nick = $("#name").val();
+    localStorage.setItem("ネーム",nick);
+    localStorage.setItem("回数",win);
+    const html = '<tr><th>'+nick+'</th><td>'+win+"回"+'</td></tr>';
+    $("#list").append(html);
+    $("#entry_btn").hide();
+})
+
+// for(let i=0; i<localStorage.length; i++){
+//     const nick = $("#name").val();
+//     localStorage.setItem("ネーム",nick);
+//     localStorage.setItem("回数",win);
+//     const html = '<tr><th>'+nick+'</th><td>'+win+"回"+'</td></tr>';
+//     $("#list").append(html);
+// }
+
+// $("#emptyy_btn").on("click",function(){
+//     localStorage.clear();
+//     $("#list").empty();
+// });
+    
+</script>
+</body>
+
+</html>
